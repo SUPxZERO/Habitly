@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
-import '../../config/theme/app_colors.dart';
-import '../../config/theme/typography.dart';
-import '../../config/constants/app_constants.dart';
-import '../../config/routes/app_routes.dart';
-import '../../shared/widgets/custom_app_bar.dart';
-import '../../shared/widgets/bottom_nav_bar.dart';
-import '../provider/habits_provider.dart';
-import '../widgets/habit_card.dart';
-import '../widgets/habit_tab_bar.dart';
+import 'package:habitly/config/theme/app_colors.dart';
+import 'package:habitly/config/theme/typography.dart';
+import 'package:habitly/config/constants/app_constants.dart';
+import 'package:habitly/config/routes/app_routes.dart';
+import 'package:habitly/shared/widgets/custom_app_bar.dart';
+import 'package:habitly/shared/widgets/bottom_nav_bar.dart';
+import 'package:habitly/features/habits/provider/habits_provider.dart';
+import 'package:habitly/features/habits/widgets/habit_card.dart';
+import 'package:habitly/features/habits/widgets/habit_tab_bar.dart';
 
 /// All Habits Screen - List of all habits with filtering
 class AllHabitsScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class AllHabitsScreen extends StatefulWidget {
 
 class _AllHabitsScreenState extends State<AllHabitsScreen> {
   int _selectedTabIndex = 0;
-  int _currentNavIndex = 1;
+  final int _currentNavIndex = 1;
 
   final List<String> _tabs = ['All', 'Daily', 'Weekly'];
 
@@ -107,17 +107,28 @@ class _AllHabitsScreenState extends State<AllHabitsScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // TODO: Navigate to add habit screen
+          context.pushNamed(AppRouter.addHabitRoute);
         },
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: HabitlyBottomNavBar(
         currentIndex: _currentNavIndex,
         onTap: (index) {
-          setState(() {
-            _currentNavIndex = index;
-          });
-          // TODO: Navigate to different tabs
+          // Navigate to different tabs
+          switch (index) {
+            case 0:
+              context.pushNamed(AppRouter.homeRoute);
+              break;
+            case 1:
+              // Already here
+              break;
+            case 2:
+              context.pushNamed(AppRouter.calendarRoute);
+              break;
+            case 3:
+              context.pushNamed(AppRouter.profileRoute);
+              break;
+          }
         },
       ),
     );

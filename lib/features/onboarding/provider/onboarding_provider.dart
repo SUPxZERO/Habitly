@@ -1,5 +1,4 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../config/constants/app_constants.dart';
 
 /// Onboarding Provider - Manages onboarding state
 class OnboardingProvider {

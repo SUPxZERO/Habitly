@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/habit_model.dart';
-import '../../shared/utils/logger.dart';
+import 'package:habitly/features/habits/models/habit_model.dart';
+import 'package:habitly/shared/utils/logger.dart';
 
 /// Habits Provider - Manages habit state and operations
 class HabitsProvider extends ChangeNotifier {
@@ -26,8 +26,11 @@ class HabitsProvider extends ChangeNotifier {
 
   /// Initialize with mock habits
   void initializeMockHabits() {
+    if (_habits.isNotEmpty) return;
+    
     _habits = [
       Habit(
+        id: '1',
         name: 'Morning Workout',
         icon: 'dumbbell',
         frequency: 'Daily',
@@ -36,6 +39,7 @@ class HabitsProvider extends ChangeNotifier {
         currentStreak: 7,
       ),
       Habit(
+        id: '2',
         name: 'Read 30 Minutes',
         icon: 'book',
         frequency: 'Daily',
@@ -44,6 +48,7 @@ class HabitsProvider extends ChangeNotifier {
         currentStreak: 8,
       ),
       Habit(
+        id: '3',
         name: 'Meditation',
         icon: 'brain',
         frequency: 'Daily',
@@ -52,6 +57,7 @@ class HabitsProvider extends ChangeNotifier {
         currentStreak: 22,
       ),
       Habit(
+        id: '4',
         name: 'Drink Water',
         icon: 'water_drop',
         frequency: 'Daily',
@@ -61,6 +67,7 @@ class HabitsProvider extends ChangeNotifier {
         currentStreak: 31,
       ),
       Habit(
+        id: '5',
         name: 'Healthy Breakfast',
         icon: 'fork_knife',
         frequency: 'Daily',
@@ -69,6 +76,7 @@ class HabitsProvider extends ChangeNotifier {
         currentStreak: 12,
       ),
       Habit(
+        id: '6',
         name: 'Sleep 8 Hours',
         icon: 'moon',
         frequency: 'Daily',
@@ -77,6 +85,7 @@ class HabitsProvider extends ChangeNotifier {
         currentStreak: 5,
       ),
       Habit(
+        id: '7',
         name: 'Code Practice',
         icon: 'pencil',
         frequency: 'Daily',

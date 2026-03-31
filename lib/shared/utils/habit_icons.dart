@@ -1,6 +1,6 @@
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:flutter/material.dart';
-import '../../config/theme/app_colors.dart';
+import 'package:habitly/config/theme/app_colors.dart';
 
 /// Habit Icon Configuration
 class HabitIconConfig {
@@ -8,7 +8,7 @@ class HabitIconConfig {
   final IconData icon;
   final Color backgroundColor;
 
-  HabitIconConfig({
+  const HabitIconConfig({
     required this.id,
     required this.icon,
     required this.backgroundColor,
@@ -17,15 +17,15 @@ class HabitIconConfig {
 
 /// Available icons for habits
 class HabitIcons {
-  static final List<HabitIconConfig> icons = [
+  static const List<HabitIconConfig> icons = [
     HabitIconConfig(
       id: 'water_drop',
       icon: PhosphorIcons.drop,
-      backgroundColor: AppColors.secondaryLight,
+      backgroundColor: AppColors.accentBlue,
     ),
     HabitIconConfig(
       id: 'dumbbell',
-      icon: PhosphorIcons.dumbbell,
+      icon: PhosphorIcons.barbell, // Changed from dumbbell to barbell if needed, or check availability
       backgroundColor: AppColors.accentPurple,
     ),
     HabitIconConfig(
@@ -55,7 +55,7 @@ class HabitIcons {
     ),
     HabitIconConfig(
       id: 'music_note',
-      icon: PhosphorIcons.note,
+      icon: PhosphorIcons.music_note,
       backgroundColor: AppColors.accentPurple,
     ),
     HabitIconConfig(
@@ -71,7 +71,7 @@ class HabitIcons {
     HabitIconConfig(
       id: 'tree',
       icon: PhosphorIcons.tree,
-      backgroundColor: AppColors.secondaryLight,
+      backgroundColor: AppColors.accentGreen,
     ),
     HabitIconConfig(
       id: 'plus',
@@ -80,11 +80,10 @@ class HabitIcons {
     ),
   ];
 
-  static HabitIconConfig? getIconById(String id) {
-    try {
-      return icons.firstWhere((icon) => icon.id == id);
-    } catch (e) {
-      return icons.first; // Return first as default
-    }
+  static HabitIconConfig getIconById(String id) {
+    return icons.firstWhere(
+      (icon) => icon.id == id,
+      orElse: () => icons.first,
+    );
   }
 }

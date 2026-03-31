@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../config/theme/app_colors.dart';
-import '../../config/theme/typography.dart';
-import '../../config/constants/app_constants.dart';
+import 'package:habitly/config/theme/app_colors.dart';
+import 'package:habitly/config/theme/typography.dart';
+import 'package:habitly/config/constants/app_constants.dart';
 
 /// Reminder Picker Widget
 class ReminderPicker extends StatefulWidget {
@@ -11,12 +11,12 @@ class ReminderPicker extends StatefulWidget {
   final ValueChanged<bool> onRemindersEnabledChanged;
 
   const ReminderPicker({
-    Key? key,
+    super.key,
     this.reminderTime,
     required this.onReminderChanged,
     this.remindersEnabled = false,
     required this.onRemindersEnabledChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<ReminderPicker> createState() => _ReminderPickerState();
@@ -60,7 +60,7 @@ class _ReminderPickerState extends State<ReminderPicker> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'Reminder (Optional)',
               style: AppTypography.labelLarge,
             ),

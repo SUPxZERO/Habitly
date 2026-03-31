@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'user_model.dart';
-import '../../shared/utils/logger.dart';
+import 'package:habitly/features/auth/models/user_model.dart';
+import 'package:habitly/shared/utils/logger.dart';
 
 /// Auth Provider - Manages authentication state
 class AuthProvider extends ChangeNotifier {

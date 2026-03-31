@@ -20,6 +20,7 @@ class AppColors {
   // Background
   static const Color bgWhite = Color(0xFFFFFFFF); // Pure white
   static const Color bgLight = Color(0xFFF5F7FA); // Light grey background
+  static const Color bgMedium = Color(0xFFEBEBEB); // Medium grey background/border
 
   // Status Colors
   static const Color success = Color(0xFF2ECC71); // Green (Complete)
@@ -50,6 +51,17 @@ class AppColors {
     Color(0xFF2ECC71),
     Color(0xFF27AE60),
   ];
+
+  // Helper to get pastel color based on icon type or index
+  static Color getPastelColor(String iconName) {
+    final name = iconName.toLowerCase();
+    if (name.contains('water') || name.contains('hydration')) return accentBlue;
+    if (name.contains('exercise') || name.contains('run')) return accentGreen;
+    if (name.contains('read') || name.contains('book')) return accentPurple;
+    if (name.contains('meditate') || name.contains('mind')) return accentPink;
+    if (name.contains('food') || name.contains('eat')) return accentOrange;
+    return accentYellow;
+  }
 
   // Transparency helpers
   static Color withOpacity(Color color, double opacity) {

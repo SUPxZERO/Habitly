@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../config/theme/app_colors.dart';
-import '../../config/theme/typography.dart';
-import '../../config/constants/app_constants.dart';
-import '../../shared/widgets/primary_button.dart';
-import '../../shared/widgets/custom_app_bar.dart';
-import '../models/habit_model.dart';
-import '../provider/habits_provider.dart';
-import '../validators/habit_validators.dart';
-import 'widgets/icon_grid_selector.dart';
-import 'widgets/frequency_selector.dart';
-import 'widgets/goal_type_selector.dart';
-import 'widgets/reminder_picker.dart';
+import 'package:habitly/config/theme/app_colors.dart';
+import 'package:habitly/config/theme/typography.dart';
+import 'package:habitly/config/constants/app_constants.dart';
+import 'package:habitly/shared/widgets/primary_button.dart';
+import 'package:habitly/shared/widgets/custom_app_bar.dart';
+import 'package:habitly/features/habits/models/habit_model.dart';
+import 'package:habitly/features/habits/provider/habits_provider.dart';
+import 'package:habitly/features/habits/validators/habit_validators.dart';
+import 'package:habitly/features/add_habit/widgets/icon_grid_selector.dart';
+import 'package:habitly/features/add_habit/widgets/frequency_selector.dart';
+import 'package:habitly/features/add_habit/widgets/goal_type_selector.dart';
+import 'package:habitly/features/add_habit/widgets/reminder_picker.dart';
 
 /// Add/Edit Habit Screen
 class AddEditHabitScreen extends StatefulWidget {
   final Habit? habit;
 
-  const AddEditHabitScreen({Key? key, this.habit}) : super(key: key);
+  const AddEditHabitScreen({super.key, this.habit});
 
   @override
   State<AddEditHabitScreen> createState() => _AddEditHabitScreenState();
@@ -60,7 +60,7 @@ class _AddEditHabitScreenState extends State<AddEditHabitScreen> {
       final habitsProvider = context.read<HabitsProvider>();
 
       final habit = Habit(
-        id: widget.habit?.id,
+        id: widget.habit?.id ?? DateTime.now().millisecondsSinceEpoch.toString(),
         name: _nameController.text.trim(),
         icon: _selectedIcon,
         frequency: _selectedFrequency,
@@ -68,10 +68,11 @@ class _AddEditHabitScreenState extends State<AddEditHabitScreen> {
         targetCount: _selectedGoalType == 'Count' ? _targetCount : null,
         reminderTime: _remindersEnabled ? _reminderTime : null,
         remindersEnabled: _remindersEnabled,
+        createdAt: widget.habit?.createdAt ?? DateTime.now(),
       );
 
       bool success;
-      if (_isEditing && widget.habit != null) {
+      if (_isEditing) {
         success = await habitsProvider.updateHabit(habit);
       } else {
         success = await habitsProvider.addHabit(habit);
@@ -79,10 +80,8 @@ class _AddEditHabitScreenState extends State<AddEditHabitScreen> {
 
       if (success && mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              _isEditing ? 'Habit updated!' : 'Habit created!',
-            ),
+          const SnackBar(
+            content: Text('Habit saved successfully!'),
             backgroundColor: AppColors.success,
           ),
         );
@@ -90,9 +89,7 @@ class _AddEditHabitScreenState extends State<AddEditHabitScreen> {
       } else if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(
-              habitsProvider.errorMessage ?? 'Something went wrong',
-            ),
+            content: Text(habitsProvider.errorMessage ?? 'Something went wrong'),
             backgroundColor: AppColors.error,
           ),
         );
@@ -116,101 +113,59 @@ class _AddEditHabitScreenState extends State<AddEditHabitScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Habit Name Field
-                Text(
-                  'Habit Name',
-                  style: AppTypography.labelLarge,
-                ),
+                const Text('Habit Name', style: AppTypography.labelLarge),
                 const SizedBox(height: AppConstants.spacingMd),
                 TextFormField(
                   controller: _nameController,
                   validator: HabitValidators.validateName,
-                  decoration: InputDecoration(
-                    hintText: 'e.g. Drink 8 glasses of water',
-                  ),
+                  decoration: const InputDecoration(hintText: 'e.g. Drink 8 glasses of water'),
                 ),
                 const SizedBox(height: AppConstants.spacingXl),
-                // Icon Selector
                 IconGridSelector(
                   selectedIcon: _selectedIcon,
-                  onIconSelected: (icon) {
-                    setState(() {
-                      _selectedIcon = icon;
-                    });
-                  },
+                  onIconSelected: (icon) => setState(() => _selectedIcon = icon),
                 ),
                 const SizedBox(height: AppConstants.spacingXl),
-                // Frequency Selector
                 FrequencySelector(
                   selectedFrequency: _selectedFrequency,
-                  onFrequencyChanged: (frequency) {
-                    setState(() {
-                      _selectedFrequency = frequency;
-                    });
-                  },
+                  onFrequencyChanged: (freq) => setState(() => _selectedFrequency = freq),
                 ),
                 const SizedBox(height: AppConstants.spacingXl),
-                // Goal Type Selector
                 GoalTypeSelector(
                   selectedGoalType: _selectedGoalType,
-                  onGoalTypeChanged: (goalType) {
-                    setState(() {
-                      _selectedGoalType = goalType;
-                    });
-                  },
+                  onGoalTypeChanged: (type) => setState(() => _selectedGoalType = type),
                   targetCount: _targetCount,
-                  onTargetCountChanged: (count) {
-                    setState(() {
-                      _targetCount = count;
-                    });
-                  },
+                  onTargetCountChanged: (count) => setState(() => _targetCount = count),
                 ),
                 const SizedBox(height: AppConstants.spacingXl),
-                // Reminder Picker
                 ReminderPicker(
                   reminderTime: _reminderTime,
-                  onReminderChanged: (time) {
-                    setState(() {
-                      _reminderTime = time;
-                    });
-                  },
+                  onReminderChanged: (time) => setState(() => _reminderTime = time),
                   remindersEnabled: _remindersEnabled,
-                  onRemindersEnabledChanged: (enabled) {
-                    setState(() {
-                      _remindersEnabled = enabled;
-                    });
-                  },
+                  onRemindersEnabledChanged: (val) => setState(() => _remindersEnabled = val),
                 ),
                 const SizedBox(height: AppConstants.spacingXl),
-                // Save Button
                 Consumer<HabitsProvider>(
-                  builder: (context, habitsProvider, _) {
-                    return PrimaryButton(
-                      label: _isEditing ? 'Update Habit' : 'Create Habit',
-                      isLoading: habitsProvider.isLoading,
-                      onPressed: _handleSave,
-                    );
-                  },
+                  builder: (context, provider, _) => PrimaryButton(
+                    label: _isEditing ? 'Update Habit' : 'Create Habit',
+                    isLoading: provider.isLoading,
+                    onPressed: _handleSave,
+                  ),
                 ),
-                const SizedBox(height: AppConstants.spacingMd),
-                // Delete Button (only for edit mode)
-                if (_isEditing)
+                if (_isEditing) ...[
+                  const SizedBox(height: AppConstants.spacingMd),
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                      onPressed: () {
-                        _showDeleteDialog();
-                      },
+                      onPressed: _showDeleteDialog,
                       style: OutlinedButton.styleFrom(
                         foregroundColor: AppColors.error,
-                        side: const BorderSide(
-                          color: AppColors.error,
-                          width: 2,
-                        ),
+                        side: const BorderSide(color: AppColors.error, width: 2),
                       ),
                       child: const Text('Delete Habit'),
                     ),
                   ),
+                ],
               ],
             ),
           ),
@@ -224,23 +179,15 @@ class _AddEditHabitScreenState extends State<AddEditHabitScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Delete Habit?'),
-        content: const Text(
-          'Are you sure you want to delete this habit? This action cannot be undone.',
-        ),
+        content: const Text('Are you sure? This action cannot be undone.'),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
           TextButton(
             onPressed: () {
               Navigator.pop(context);
               _deleteHabit();
             },
-            child: Text(
-              'Delete',
-              style: TextStyle(color: AppColors.error),
-            ),
+            child: const Text('Delete', style: TextStyle(color: AppColors.error)),
           ),
         ],
       ),
@@ -249,16 +196,11 @@ class _AddEditHabitScreenState extends State<AddEditHabitScreen> {
 
   void _deleteHabit() async {
     if (widget.habit == null) return;
-
     final habitsProvider = context.read<HabitsProvider>();
     final success = await habitsProvider.deleteHabit(widget.habit!.id);
-
     if (success && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Habit deleted'),
-          backgroundColor: AppColors.success,
-        ),
+        const SnackBar(content: Text('Habit deleted'), backgroundColor: AppColors.success),
       );
       Navigator.pop(context);
     }

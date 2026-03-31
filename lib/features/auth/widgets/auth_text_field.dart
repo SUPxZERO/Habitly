@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../config/theme/app_colors.dart';
-import '../../config/theme/typography.dart';
+import 'package:habitly/config/theme/app_colors.dart';
+import 'package:habitly/config/theme/typography.dart';
 
 /// Custom Text Field for Auth forms
 class AuthTextField extends StatefulWidget {

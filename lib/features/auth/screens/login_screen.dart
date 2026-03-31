@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
-import '../../config/theme/app_colors.dart';
-import '../../config/theme/typography.dart';
-import '../../config/constants/app_constants.dart';
-import '../../config/routes/app_routes.dart';
-import '../../shared/widgets/primary_button.dart';
-import '../../shared/widgets/custom_app_bar.dart';
-import '../widgets/auth_text_field.dart';
-import '../provider/auth_provider.dart';
-import '../validators/auth_validators.dart';
-import 'forgot_password_screen.dart';
+import 'package:habitly/config/theme/app_colors.dart';
+import 'package:habitly/config/theme/typography.dart';
+import 'package:habitly/config/constants/app_constants.dart';
+import 'package:habitly/config/routes/app_routes.dart';
+import 'package:habitly/shared/widgets/primary_button.dart';
+import 'package:habitly/shared/widgets/custom_app_bar.dart';
+import 'package:habitly/features/auth/widgets/auth_text_field.dart';
+import 'package:habitly/features/auth/provider/auth_provider.dart';
+import 'package:habitly/features/auth/validators/auth_validators.dart';
+import 'package:habitly/features/auth/screens/forgot_password_screen.dart';
 
 /// Login Screen
 class LoginScreen extends StatefulWidget {
@@ -95,7 +95,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: AppConstants.spacingXl),
-                // Email Field
                 AuthTextField(
                   label: 'Email Address',
                   hint: 'e.g. john@example.com',
@@ -104,7 +103,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   keyboardType: TextInputType.emailAddress,
                 ),
                 const SizedBox(height: AppConstants.spacingLg),
-                // Password Field
                 AuthTextField(
                   label: 'Password',
                   hint: 'Enter your password',
@@ -113,7 +111,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   obscureText: true,
                 ),
                 const SizedBox(height: AppConstants.spacingMd),
-                // Forgot Password Link
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
@@ -134,7 +131,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: AppConstants.spacingXl),
-                // Login Button
                 Consumer<AuthProvider>(
                   builder: (context, authProvider, _) {
                     return PrimaryButton(
@@ -145,7 +141,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                 ),
                 const SizedBox(height: AppConstants.spacingLg),
-                // Sign Up Link
                 Center(
                   child: GestureDetector(
                     onTap: () => Navigator.pop(context),

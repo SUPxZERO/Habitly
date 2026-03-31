@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
-import '../../config/theme/app_colors.dart';
-import '../../config/theme/typography.dart';
-import '../../config/constants/app_constants.dart';
-import '../../config/routes/app_routes.dart';
-import '../../shared/widgets/habitly_card.dart';
-import '../../shared/widgets/bottom_nav_bar.dart';
-import '../provider/habits_provider.dart';
-import '../widgets/habit_card.dart';
-import '../models/habit_model.dart';
+import 'package:habitly/config/theme/app_colors.dart';
+import 'package:habitly/config/theme/typography.dart';
+import 'package:habitly/config/constants/app_constants.dart';
+import 'package:habitly/config/routes/app_routes.dart';
+import 'package:habitly/shared/widgets/habitly_card.dart';
+import 'package:habitly/shared/widgets/bottom_nav_bar.dart';
+import 'package:habitly/features/habits/provider/habits_provider.dart';
+import 'package:habitly/features/habits/widgets/habit_card.dart';
+import 'package:habitly/features/habits/models/habit_model.dart';
 
 /// Home Screen - Today's habits and progress
 class HomeScreen extends StatefulWidget {
@@ -144,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           'Your Habits',
                           style: AppTypography.headline4,
                         ),
-                        Icon(
+                        const Icon(
                           Icons.arrow_forward_ios,
                           size: 16,
                           color: AppColors.textLight,
@@ -218,7 +218,21 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() {
             _currentNavIndex = index;
           });
-          // TODO: Navigate to different tabs
+          // Navigate to different tabs
+          switch (index) {
+            case 0:
+              // Home - already here
+              break;
+            case 1:
+              context.pushNamed(AppRouter.habitsRoute);
+              break;
+            case 2:
+              context.pushNamed(AppRouter.calendarRoute);
+              break;
+            case 3:
+              context.pushNamed(AppRouter.profileRoute);
+              break;
+          }
         },
       ),
     );

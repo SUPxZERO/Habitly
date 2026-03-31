@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../config/theme/app_colors.dart';
-import '../../config/theme/typography.dart';
-import '../../config/constants/app_constants.dart';
-import '../../shared/utils/habit_icons.dart';
+import 'package:habitly/config/theme/app_colors.dart';
+import 'package:habitly/config/theme/typography.dart';
+import 'package:habitly/config/constants/app_constants.dart';
+import 'package:habitly/shared/utils/habit_icons.dart';
 
 /// Icon Grid Selector for Habit Selection
 class IconGridSelector extends StatefulWidget {
@@ -10,10 +10,10 @@ class IconGridSelector extends StatefulWidget {
   final ValueChanged<String> onIconSelected;
 
   const IconGridSelector({
-    Key? key,
+    super.key,
     this.selectedIcon,
     required this.onIconSelected,
-  }) : super(key: key);
+  });
 
   @override
   State<IconGridSelector> createState() => _IconGridSelectorState();
@@ -33,7 +33,7 @@ class _IconGridSelectorState extends State<IconGridSelector> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Choose Icon',
           style: AppTypography.labelLarge,
         ),

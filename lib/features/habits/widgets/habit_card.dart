@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../config/theme/app_colors.dart';
-import '../../config/theme/typography.dart';
-import '../../config/constants/app_constants.dart';
-import '../models/habit_model.dart';
-import '../../shared/utils/habit_icons.dart';
+import 'package:habitly/config/theme/app_colors.dart';
+import 'package:habitly/config/theme/typography.dart';
+import 'package:habitly/config/constants/app_constants.dart';
+import 'package:habitly/features/habits/models/habit_model.dart';
+import 'package:habitly/shared/utils/habit_icons.dart';
 
 /// Habit Card Widget - Display individual habit in list
 class HabitCard extends StatelessWidget {
@@ -13,12 +13,12 @@ class HabitCard extends StatelessWidget {
   final VoidCallback? onCheckTap;
 
   const HabitCard({
-    Key? key,
+    super.key,
     required this.habit,
     required this.isCompleted,
     this.onTap,
     this.onCheckTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +27,11 @@ class HabitCard extends StatelessWidget {
 
     return Card(
       margin: const EdgeInsets.only(bottom: AppConstants.spacingMd),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      elevation: 0,
+      color: Colors.white,
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(20),
@@ -39,12 +44,12 @@ class HabitCard extends StatelessWidget {
                 width: 56,
                 height: 56,
                 decoration: BoxDecoration(
-                  color: iconConfig?.backgroundColor ?? AppColors.primaryLight,
+                  color: iconConfig.backgroundColor,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Center(
                   child: Icon(
-                    iconConfig?.icon ?? Icons.star_outline,
+                    iconConfig.icon,
                     color: AppColors.primary,
                     size: 28,
                   ),

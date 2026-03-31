@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../config/theme/app_colors.dart';
-import '../../config/theme/typography.dart';
-import '../../config/constants/app_constants.dart';
-import '../../config/routes/app_routes.dart';
-import '../../shared/widgets/primary_button.dart';
-import '../../shared/widgets/secondary_button.dart';
+import 'package:habitly/config/theme/app_colors.dart';
+import 'package:habitly/config/theme/typography.dart';
+import 'package:habitly/config/constants/app_constants.dart';
+import 'package:habitly/config/routes/app_routes.dart';
+import 'package:habitly/shared/widgets/primary_button.dart';
+import 'package:habitly/shared/widgets/secondary_button.dart';
 
 /// Entry Page - Splash/Login screen
 class EntryPage extends StatelessWidget {

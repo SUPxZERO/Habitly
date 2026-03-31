@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../config/theme/app_colors.dart';
-import '../../config/theme/typography.dart';
-import '../../config/constants/app_constants.dart';
+import 'package:habitly/config/theme/app_colors.dart';
+import 'package:habitly/config/theme/typography.dart';
+import 'package:habitly/config/constants/app_constants.dart';
 
 /// Goal Type Selector - Yes/No or Count based
 class GoalTypeSelector extends StatefulWidget {
@@ -11,12 +11,12 @@ class GoalTypeSelector extends StatefulWidget {
   final ValueChanged<int?>? onTargetCountChanged;
 
   const GoalTypeSelector({
-    Key? key,
+    super.key,
     this.selectedGoalType,
     required this.onGoalTypeChanged,
     this.targetCount,
     this.onTargetCountChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<GoalTypeSelector> createState() => _GoalTypeSelectorState();
@@ -46,7 +46,7 @@ class _GoalTypeSelectorState extends State<GoalTypeSelector> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Goal Type',
           style: AppTypography.labelLarge,
         ),
@@ -64,7 +64,7 @@ class _GoalTypeSelectorState extends State<GoalTypeSelector> {
         ),
         if (_selectedGoalType == 'Count') ...[
           const SizedBox(height: AppConstants.spacingLg),
-          Text(
+          const Text(
             'Target Count',
             style: AppTypography.labelLarge,
           ),
@@ -76,9 +76,9 @@ class _GoalTypeSelectorState extends State<GoalTypeSelector> {
               final count = int.tryParse(value) ?? 1;
               widget.onTargetCountChanged?.call(count);
             },
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'e.g. 8 (for 8 glasses of water)',
-              contentPadding: const EdgeInsets.symmetric(
+              contentPadding: EdgeInsets.symmetric(
                 horizontal: AppConstants.spacingMd,
                 vertical: AppConstants.spacingMd,
               ),

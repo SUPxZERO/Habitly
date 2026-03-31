@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../../config/theme/app_colors.dart';
-import '../../config/theme/typography.dart';
-import '../../config/constants/app_constants.dart';
-import '../../shared/widgets/primary_button.dart';
-import '../models/onboarding_model.dart';
-import '../widgets/onboarding_slide_widget.dart';
-import '../provider/onboarding_provider.dart';
+import 'package:habitly/config/theme/app_colors.dart';
+import 'package:habitly/config/theme/typography.dart';
+import 'package:habitly/config/constants/app_constants.dart';
+import 'package:habitly/shared/widgets/primary_button.dart';
+import 'package:habitly/features/onboarding/models/onboarding_model.dart';
+import 'package:habitly/features/onboarding/widgets/onboarding_slide_widget.dart';
+import 'package:habitly/features/onboarding/provider/onboarding_provider.dart';
 
 /// Onboarding Screen
 class OnboardingScreen extends StatefulWidget {
@@ -56,14 +56,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   void _completeOnboarding() {
     OnboardingProvider.setOnboardingComplete();
-    // TODO: Navigate to Entry Page or Home
-    Navigator.of(context).pop();
+    // Navigator.of(context).pop();
+    // In a real app, use GoRouter to navigate to entry or home
   }
 
   void _skipOnboarding() {
     OnboardingProvider.setOnboardingComplete();
-    // TODO: Navigate to Entry Page
-    Navigator.of(context).pop();
+    // Navigator.of(context).pop();
   }
 
   @override

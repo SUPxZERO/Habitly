@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../config/theme/app_colors.dart';
+import 'package:habitly/config/theme/app_colors.dart';
+import 'package:habitly/config/theme/typography.dart';
 
 /// Onboarding slide widget
 class OnboardingSlideWidget extends StatelessWidget {
@@ -39,21 +40,14 @@ class OnboardingSlideWidget extends StatelessWidget {
           const SizedBox(height: 40),
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.w700,
-              color: AppColors.textDark,
-            ),
+            style: AppTypography.headline1,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
           Text(
             description,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+            style: AppTypography.bodyLarge.copyWith(
               color: AppColors.textMedium,
-              height: 1.5,
             ),
             textAlign: TextAlign.center,
           ),

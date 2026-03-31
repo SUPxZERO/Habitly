@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../config/theme/app_colors.dart';
-import '../../config/theme/typography.dart';
-import '../../config/constants/app_constants.dart';
+import 'package:habitly/config/theme/app_colors.dart';
+import 'package:habitly/config/theme/typography.dart';
+import 'package:habitly/config/constants/app_constants.dart';
 
 /// Frequency Selector - Daily or Weekly
 class FrequencySelector extends StatefulWidget {
@@ -9,10 +9,10 @@ class FrequencySelector extends StatefulWidget {
   final ValueChanged<String> onFrequencyChanged;
 
   const FrequencySelector({
-    Key? key,
+    super.key,
     this.selectedFrequency,
     required this.onFrequencyChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<FrequencySelector> createState() => _FrequencySelectorState();
@@ -32,7 +32,7 @@ class _FrequencySelectorState extends State<FrequencySelector> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Frequency',
           style: AppTypography.labelLarge,
         ),
